@@ -34,5 +34,13 @@ export class ListaProductosComponent implements OnInit {
     // Filtra los productos y actualiza productosFiltrados
   }
 
+  agregarProducto() {
+    // Aquí puedes abrir un modal para agregar un producto o redirigir a un formulario
+    // Por ejemplo:
+    // this.abrirModalAgregarProducto();
+    // o
+    // this.router.navigate(['/ruta-para-agregar-producto']);
+  }
+
 
 }

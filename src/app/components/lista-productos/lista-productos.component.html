@@ -1,5 +1,8 @@
 <div class="container mt-5">
     <h2 class="mb-4">Lista de Productos</h2>
+
+    <!-- Botón para agregar productos -->
+   
     <div class="row mb-3">
         <div class="col-md-3">
             <input type="text" [(ngModel)]="nombreProducto" (keyup)="buscarPorNombre()" placeholder="Buscar por Nombre"
@@ -8,6 +11,12 @@
         <div class="col-md-3">
             <input type="text" [(ngModel)]="codigoBarras" (keyup)="buscarPorCodigo()"
                 placeholder="Buscar por Código de Barras" class="form-control">
+        </div>
+        <div class="col-md-3 text-right">
+            
+        </div>
+        <div class="col-md-3 text-right">
+            <button type="button" class="btn btn-success" (click)="agregarProducto()">Agregar Producto</button>
         </div>
        
     </div>

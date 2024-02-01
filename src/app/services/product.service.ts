@@ -37,4 +37,13 @@ export class ProductService {
     const url = `${this.apiUrl}/${productId}`;
     return this.http.delete<any>(url);
   }
+
+  // En product.service.ts
+
+  // Obtener un producto por código de barras
+  getProductByCode(barcode: string): Observable<any> {
+    const url = `${this.apiUrl}/byCode/${barcode}`;
+    return this.http.get<any>(url);
+  }
+
 }

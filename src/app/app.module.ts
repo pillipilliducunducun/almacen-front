@@ -6,16 +6,20 @@ import { AppRoutingModule } from './app-routing.module'; // Asegúrate de import
 import { AppComponent } from './app.component';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
+import { CajaSupermercadoComponent } from './components/caja-supermercado/caja-supermercado.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaProductosComponent,
-    DetalleProductoComponent
+    DetalleProductoComponent,
+    CajaSupermercadoComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule // Importa AppRoutingModule aquí en lugar de RouterModule.forRoot([])
   ],
   providers: [],

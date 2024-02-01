@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
 import { CajaSupermercadoComponent } from './components/caja-supermercado/caja-supermercado.component'; // Asegúrate de importar tu nuevo componente
 
@@ -9,11 +8,7 @@ const routes: Routes = [
     {
         path: 'productos',
         component: ListaProductosComponent,
-    },
-    {
-        path: 'productos/:id',
-        component: DetalleProductoComponent,
-    },
+    },    
     {
         path: 'caja-supermercado', // Define la nueva URL
         component: CajaSupermercadoComponent, // Asocia la nueva URL con tu nuevo componente

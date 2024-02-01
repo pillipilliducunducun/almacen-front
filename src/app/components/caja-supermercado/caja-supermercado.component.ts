@@ -44,6 +44,17 @@ export class CajaSupermercadoComponent {
     return productos.find(producto => producto.codigo === codigo);
   }
 
+  quitarProducto(indice: number) {
+    const producto = this.productosAgregados[indice];
+    if (producto) {
+      // Restar el precio del producto del total de la compra
+      this.totalCompra -= producto.precio;
+      // Quitar el producto de la lista de productos agregados
+      this.productosAgregados.splice(indice, 1);
+    }
+  }
+
+
   
 
 }

@@ -16,7 +16,8 @@
             
         </div>
         <div class="col-md-3 text-right">
-            <button type="button" class="btn btn-success" (click)="agregarProducto()">Agregar Producto</button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">Agregar
+                Producto</button>
         </div>
        
     </div>
@@ -50,3 +51,4 @@
         </div>
     </div>
 </div>
+<app-agregar-producto-modal (productoAgregado)="onProductoAgregado($event)"></app-agregar-producto-modal>

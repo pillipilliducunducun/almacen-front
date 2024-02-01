@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { AgregarProductoModalComponent } from '../agregar-producto-modal/agregar-producto-modal.component';
+
 
 @Component({
   selector: 'app-lista-productos',
@@ -35,11 +37,16 @@ export class ListaProductosComponent implements OnInit {
   }
 
   agregarProducto() {
-    // Aquí puedes abrir un modal para agregar un producto o redirigir a un formulario
-    // Por ejemplo:
-    // this.abrirModalAgregarProducto();
-    // o
-    // this.router.navigate(['/ruta-para-agregar-producto']);
+  // Aquí puedes abrir un modal para agregar un producto o redirigir a un formulario
+  // Por ejemplo:
+  // this.abrirModalAgregarProducto();
+  // o
+  // this.router.navigate(['/ruta-para-agregar-producto']);
+  }
+  
+  onProductoAgregado(producto: any) {
+    // Aquí puedes agregar el producto a la lista o realizar otras acciones necesarias
+    this.productos.push(producto);
   }
 
 

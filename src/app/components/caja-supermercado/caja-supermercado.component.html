@@ -1,20 +1,12 @@
 <div class="container py-5">
-    <div class="row justify-content-center">
+    <div class="row">
+        <!-- Columna de la Lista de Productos -->
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
                     <h3 class="card-title text-center">Caja de Supermercado</h3>
                 </div>
                 <div class="card-body">
-                    <div class="total-compra">
-                        <h4>Total de Compra:</h4>
-                        <p class="font-weight-bold text-success">$ {{ totalCompra }}</p>
-                    </div>
-                    <div class="mb-3">
-                        <label for="codigoBarras" class="form-label">Código de Barras</label>
-                        <input type="text" class="form-control" id="codigoBarras" [(ngModel)]="codigoBarras"
-                            (keyup.enter)="agregarProductoPorCodigo()" placeholder="Ingresar código de barras">
-                    </div>
                     <div class="productos-agregados mb-3">
                         <h4>Productos Agregados:</h4>
                         <ul class="list-group">
@@ -24,7 +16,25 @@
                             </li>
                         </ul>
                     </div>
-                   
+                </div>
+            </div>
+        </div>
+        <!-- Columna del Código de Barras y Total -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title text-center">Código de Barras y Total</h3>
+                </div>
+                <div class="card-body">
+                    <div class="total-compra mb-3">
+                        <h4>Total de Compra:</h4>
+                        <h1><p class="font-weight-bold text-success">$ {{ totalCompra }}</p></h1>
+                    </div>
+                    <div class="mb-3">
+                        <label for="codigoBarras" class="form-label">Código de Barras</label>
+                        <input type="text" class="form-control" id="codigoBarras" [(ngModel)]="codigoBarras"
+                            (keyup.enter)="agregarProductoPorCodigo()" placeholder="Ingresar código de barras">
+                    </div>                    
                 </div>
             </div>
         </div>

@@ -8,13 +8,15 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
 import { CajaSupermercadoComponent } from './components/caja-supermercado/caja-supermercado.component';
 import { FormsModule } from '@angular/forms';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaProductosComponent,
     DetalleProductoComponent,
-    CajaSupermercadoComponent
+    CajaSupermercadoComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

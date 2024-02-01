@@ -43,4 +43,7 @@ export class CajaSupermercadoComponent {
 
     return productos.find(producto => producto.codigo === codigo);
   }
+
+  
+
 }

@@ -1,17 +1,43 @@
 <div class="container mt-5">
     <h2 class="mb-4">Lista de Productos</h2>
-    <div class="list-group">
-        <div *ngFor="let producto of productos" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{ producto.nombre }}</h5>
-                <div>
-                    <button type="button" class="btn btn-primary btn-sm mr-2">Editar</button>
-                    <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                </div>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <input type="text" [(ngModel)]="nombreProducto" (keyup)="buscarPorNombre()" placeholder="Buscar por Nombre"
+                class="form-control">
+        </div>
+        <div class="col-md-3">
+            <input type="text" [(ngModel)]="codigoBarras" (keyup)="buscarPorCodigo()"
+                placeholder="Buscar por Código de Barras" class="form-control">
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Código de Barras</th>
+                            <th>Valor</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let producto of productos">
+                            <td>{{ producto.id }}</td>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.codigo_barra }}</td>
+                            <td>{{ producto.valor | currency }}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm">Editar</button>&nbsp;
+                                <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <p class="mb-1"><strong>Código de Barras:</strong> {{ producto.codigo_barra }}</p>
-            <p class="mb-1"><strong>Valor:</strong> {{ producto.valor | currency }}</p>
-            <!-- Agrega aquí más detalles del producto si es necesario -->
         </div>
     </div>
 </div>

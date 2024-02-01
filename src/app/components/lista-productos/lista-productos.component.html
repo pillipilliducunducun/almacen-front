@@ -1,12 +1,17 @@
 <div class="container mt-5">
     <h2 class="mb-4">Lista de Productos</h2>
     <div class="list-group">
-        <a *ngFor="let producto of productos" [routerLink]="['/productos', producto.id]"
-            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-            <div>
+        <div *ngFor="let producto of productos" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ producto.nombre }}</h5>
+                <div>
+                    <button type="button" class="btn btn-primary btn-sm mr-2">Editar</button>
+                    <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                </div>
             </div>
-            <span class="badge badge-primary badge-pill">Detalles</span>
-        </a>
+            <p class="mb-1"><strong>Código de Barras:</strong> {{ producto.codigo_barra }}</p>
+            <p class="mb-1"><strong>Valor:</strong> {{ producto.valor | currency }}</p>
+            <!-- Agrega aquí más detalles del producto si es necesario -->
+        </div>
     </div>
 </div>

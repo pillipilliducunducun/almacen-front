@@ -6,22 +6,15 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./agregar-producto-modal.component.css']
 })
 export class AgregarProductoModalComponent {
-  producto = {
-    nombre: '',
-    codigo_barra: '',
-    valor: 0
-  };
+  // EventEmitter para notificar al componente padre que el modal debe cerrarse
+  @Output() cerrarModal = new EventEmitter<void>();
 
-  @Output() productoAgregado = new EventEmitter<any>();
+  constructor() { }
 
-  agregarProducto() {
-    // Aquí podrías realizar una validación o incluso guardar en una base de datos
-    this.productoAgregado.emit(this.producto);
-    this.producto = { nombre: '', codigo_barra: '', valor: 0 }; // Resetear el objeto producto
-    // Cerrar el modal con JavaScript puro, aunque lo ideal sería usar una librería de modales como ng-bootstrap o Angular Material
-    document.getElementById('agregarProductoModal')?.classList.remove('show');
-    document.querySelector('.modal-backdrop')?.remove();
-    document.body.classList.remove('modal-open');
-    document.body.style.overflow = 'auto';
+  // Método para cerrar el modal, emite el evento para notificar al componente padre
+  cerrar() {
+    this.cerrarModal.emit();
   }
+
+  // Aquí puedes agregar más lógica, como la función para agregar un nuevo producto, validaciones, etc.
 }

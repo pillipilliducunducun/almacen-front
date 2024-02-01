@@ -14,6 +14,8 @@ export class ListaProductosComponent implements OnInit {
   nombreProducto: string = ''; // Propiedad para el nombre del producto
   productos: any[] = [ /* Aquí debes tener una lista de productos */];
   productosFiltrados: any[] = []; // Propiedad para los productos filtrados
+  mostrarModal: boolean = false;
+
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
@@ -37,17 +39,9 @@ export class ListaProductosComponent implements OnInit {
   }
 
   agregarProducto() {
-  // Aquí puedes abrir un modal para agregar un producto o redirigir a un formulario
-  // Por ejemplo:
-  // this.abrirModalAgregarProducto();
-  // o
-  // this.router.navigate(['/ruta-para-agregar-producto']);
+    this.mostrarModal = true;
   }
-  
-  onProductoAgregado(producto: any) {
-    // Aquí puedes agregar el producto a la lista o realizar otras acciones necesarias
-    this.productos.push(producto);
-  }
+
 
 
 }

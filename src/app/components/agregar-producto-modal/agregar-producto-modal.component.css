@@ -1,0 +1,33 @@
+/* Estilo para el fondo oscuro */
+.modal-background {
+  position: fixed; /* Posición fija para cubrir toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semitransparente para el efecto oscuro */
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  z-index: 1000; /* Asegura que el fondo esté por encima de otros elementos pero debajo del modal */
+}
+
+/* Estilo para el contenido del modal */
+.modal-content {
+  background-color: #fff; /* Fondo blanco para el modal */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+  width: 50%; /* Ancho del modal */
+  max-width: 500px; /* Máximo ancho para asegurar que no sea demasiado grande en pantallas grandes */
+}
+
+/* Estilo para el botón de cerrar */
+.close-btn {
+  float: right; /* Posiciona el botón a la derecha */
+  font-size: 1.5rem; /* Tamaño del texto */
+  font-weight: bold; /* Texto en negrita */
+  border: none; /* Sin bordes */
+  background: none; /* Sin fondo */
+  cursor: pointer; /* Cambia el cursor a tipo puntero */
+}

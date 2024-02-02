@@ -34,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let producto of productos">
+                        <tr *ngFor="let producto of productosFiltrados">
                             <td>{{ producto.id }}</td>
                             <td>{{ producto.nombre }}</td>
                             <td>{{ producto.codigo_barra }}</td>
@@ -42,7 +42,6 @@
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm" (click)="editarProducto(producto)">Editar</button>&nbsp;
                                 <button type="button" class="btn btn-danger btn-sm" (click)="eliminarProducto(producto.id)">Eliminar</button>
-
                             </td>
                         </tr>
                     </tbody>

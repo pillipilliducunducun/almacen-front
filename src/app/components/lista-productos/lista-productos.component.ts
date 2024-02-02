@@ -28,15 +28,21 @@ export class ListaProductosComponent implements OnInit {
   // Función para buscar por código de barras
   buscarPorCodigo(event?: any) {
     const codigo = event ? event.target.value : this.codigoBarras;
-    // Implementa la lógica de búsqueda por código de barras aquí
-    // Filtra los productos y actualiza productosFiltrados
+    if (codigo) {
+      this.productosFiltrados = this.productos.filter(producto => producto.codigo_barra.includes(codigo));
+    } else {
+      this.productosFiltrados = [...this.productos]; // Copia todos los productos si no hay criterio de búsqueda
+    }
   }
 
   // Función para buscar por nombre de producto
   buscarPorNombre(event?: any) {
     const nombre = event ? event.target.value : this.nombreProducto;
-    // Implementa la lógica de búsqueda por nombre aquí
-    // Filtra los productos y actualiza productosFiltrados
+    if (nombre) {
+      this.productosFiltrados = this.productos.filter(producto => producto.nombre.toLowerCase().includes(nombre.toLowerCase()));
+    } else {
+      this.productosFiltrados = [...this.productos]; // Copia todos los productos si no hay criterio de búsqueda
+    }
   }
 
   eliminarProducto(productId: number) {
@@ -78,6 +84,7 @@ export class ListaProductosComponent implements OnInit {
   refrescarListaProductos() {
     this.productService.getAllProducts().subscribe(data => {
       this.productos = data;
+      this.productosFiltrados = [...this.productos]; // Inicializa los productos filtrados con todos los productos
     });
   }
 

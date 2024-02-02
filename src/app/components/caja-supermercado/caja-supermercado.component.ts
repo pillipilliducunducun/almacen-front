@@ -11,7 +11,9 @@ export class CajaSupermercadoComponent {
   codigoBarras: string = '';
   productosAgregados: any[] = [];
   totalCompra: number = 0;
-  
+  dineroRecibido: string = '' ;
+  vuelto: number = 0;
+  mostrarVistaDetalle: boolean = false;
 
   respuestaProductos: any[] = [];
 
@@ -52,6 +54,7 @@ export class CajaSupermercadoComponent {
           title: 'Error',
           text: 'El código de barras no corresponde a un producto válido.',
         });
+        this.codigoBarras = '';
       }
     } else {
       // Muestra un mensaje de error si el campo de código de barras está vacío.
@@ -67,8 +70,16 @@ export class CajaSupermercadoComponent {
   quitarProducto(indice: number) {
     const producto = this.productosAgregados[indice];
     if (producto) {
-      // Restar el precio del producto del total de la compra
-      this.totalCompra -= producto.precio;
+      // Asegurándose de que el valor a restar es un número
+      const precioProducto = Number(producto.valor); // Cambia 'valor' a 'precio' si es necesario
+
+      if (!isNaN(precioProducto)) {
+        // Restar el valor del producto del total de la compra
+        this.totalCompra -= precioProducto;
+      } else {
+        console.error('El valor del producto no es un número');
+      }
+
       // Quitar el producto de la lista de productos agregados
       this.productosAgregados.splice(indice, 1);
     }
@@ -79,9 +90,50 @@ export class CajaSupermercadoComponent {
     }
   }
 
+
   limpiarCarrito() {
     this.productosAgregados = [];
     this.totalCompra = 0;
+  }
+
+  realizarPago() {
+    this.dineroRecibido = ''; // Establece dineroRecibido en 0
+    this.mostrarVistaDetalle = true; // Mostrar la vista nueva
+  }
+
+  
+  calcularVuelto() {
+    // Convierte dineroRecibido a número
+    const dineroRecibidoNumero = parseFloat(this.dineroRecibido);
+
+    if (isNaN(dineroRecibidoNumero)) {
+      // Manejo de error si la entrada no es un número válido
+      Swal.fire({
+        icon: 'error',
+        title: 'Dinero Inválido',
+        text: 'Por favor, ingrese un número válido para el dinero recibido.',
+      });
+      this.vuelto = 0;
+    } else if (dineroRecibidoNumero >= this.totalCompra) {
+      this.vuelto = dineroRecibidoNumero - this.totalCompra;
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Dinero Insuficiente',
+        text: 'El dinero recibido es insuficiente para pagar la compra.',
+      });
+      this.vuelto = 0;
+    }
+  }
+
+  finalizarCompra() {
+    // Restablecer todas las variables
+    this.productosAgregados = [];
+    this.totalCompra = 0;
+    this.dineroRecibido = '';
+    this.vuelto = 0;
+    this.mostrarVistaDetalle = false;
+    // Aquí puedes agregar cualquier otra lógica necesaria para finalizar la compra
   }
 
 }

@@ -31,3 +31,12 @@
   background: none; /* Sin fondo */
   cursor: pointer; /* Cambia el cursor a tipo puntero */
 }
+
+input {
+  font-size: 22px; /* Ajusta el tamaño del texto según tus preferencias */
+  padding: 10px; /* Ajusta el tamaño del input según tus preferencias */
+}
+
+button {
+  font-size: 1.2rem; /* Ajusta el tamaño del texto según tus preferencias */
+}

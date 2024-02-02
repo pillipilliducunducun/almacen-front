@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-producto-modal',
@@ -38,47 +39,64 @@ export class AgregarProductoModalComponent {
   }
 
   guardarProducto() {
+    // Verificar que todos los campos requeridos estén presentes
     if (!this.nombreProducto || !this.codigoBarras || this.precioProducto === null) {
-      console.error('Todos los campos son necesarios');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Todos los campos son necesarios!',
+      });
       return;
     }
 
-    const producto = {
-      nombre: this.nombreProducto,
-      codigo_barra: this.codigoBarras,
-      valor: this.precioProducto
-    };
+    // Mostrar el diálogo de confirmación
+    Swal.fire({
+      title: this.esModoEdicion ? '¿Actualizar Producto?' : '¿Agregar Producto?',
+      text: this.esModoEdicion ? "¡Los cambios se guardarán!" : "¡Se agregará un nuevo producto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: this.esModoEdicion ? 'Sí, actualizar!' : 'Sí, agregar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // El usuario confirmó, proceder con agregar o actualizar
+        const producto = {
+          nombre: this.nombreProducto,
+          codigo_barra: this.codigoBarras,
+          valor: this.precioProducto
+        };
 
-    if (this.esModoEdicion) {
-      if (this.idProducto === null) {
-        console.error('Error: No se proporcionó un ID de producto para la actualización.');
-        return;
+        if (this.esModoEdicion) {
+          if (this.idProducto === null) {
+            Swal.fire('Error', 'No se proporcionó un ID de producto para la actualización.', 'error');
+            return;
+          }
+          this.productService.updateProduct(this.idProducto, producto).subscribe({
+            next: (response) => {
+              Swal.fire('Actualizado', 'El producto ha sido actualizado.', 'success');
+              this.cerrar();
+              this.refrescarProductos.emit();
+            },
+            error: (error) => {
+              Swal.fire('Error', 'Error al actualizar el producto.', 'error');
+            }
+          });
+        } else {
+          this.productService.createProduct(producto).subscribe({
+            next: (response) => {
+              Swal.fire('Agregado', 'El producto ha sido agregado.', 'success');
+              this.cerrar();
+              this.refrescarProductos.emit();
+            },
+            error: (error) => {
+              Swal.fire('Error', 'Error al agregar el producto.', 'error');
+            }
+          });
+        }
       }
-
-      this.productService.updateProduct(this.idProducto, producto).subscribe({
-        next: (response) => {
-          console.log('Producto actualizado', response);
-          this.cerrar();
-          this.refrescarProductos.emit();
-        },
-        error: (error) => {
-          console.error('Error al actualizar el producto', error);
-        }
-      });
-    } else {
-      this.productService.createProduct(producto).subscribe({
-        next: (response) => {
-          console.log('Producto agregado', response);
-          this.cerrar();
-          this.refrescarProductos.emit();
-        },
-        error: (error) => {
-          console.error('Error al agregar el producto', error);
-        }
-      });
-    }
+    });
   }
-
 
 
 

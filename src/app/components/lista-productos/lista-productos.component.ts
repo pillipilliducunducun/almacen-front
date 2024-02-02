@@ -3,7 +3,6 @@ import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-lista-productos',
   templateUrl: './lista-productos.component.html',
@@ -17,8 +16,6 @@ export class ListaProductosComponent implements OnInit {
   precioProducto: number | null = null;
   mostrarModal: boolean = false;
   productoActualParaEditar: any = null;
-
-
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
@@ -87,7 +84,4 @@ export class ListaProductosComponent implements OnInit {
       this.productosFiltrados = [...this.productos]; // Inicializa los productos filtrados con todos los productos
     });
   }
-
-
-
 }

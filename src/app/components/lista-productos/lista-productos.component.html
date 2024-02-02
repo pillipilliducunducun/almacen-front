@@ -1,8 +1,5 @@
 <div class="container mt-5">
     <h2 class="mb-4">Lista de Productos</h2>
-
-    <!-- Botón para agregar productos -->
-   
     <div class="row mb-3">
         <div class="col-md-3">
             <input type="text" [(ngModel)]="nombreProducto" (keyup)="buscarPorNombre()" placeholder="Buscar por Nombre"
@@ -13,12 +10,10 @@
                 placeholder="Buscar por Código de Barras" class="form-control">
         </div>
         <div class="col-md-3 text-right">
-            
         </div>
         <div class="col-md-3 text-right">
             <button type="button" class="btn btn-success" (click)="agregarProducto()">Agregar Producto</button>
-            </div>
-       
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
@@ -40,8 +35,10 @@
                             <td>{{ producto.codigo_barra }}</td>
                             <td>${{ producto.valor }}</td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm" (click)="editarProducto(producto)">Editar</button>&nbsp;
-                                <button type="button" class="btn btn-danger btn-sm" (click)="eliminarProducto(producto.id)">Eliminar</button>
+                                <button type="button" class="btn btn-primary btn-sm"
+                                    (click)="editarProducto(producto)">Editar</button>&nbsp;
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    (click)="eliminarProducto(producto.id)">Eliminar</button>
                             </td>
                         </tr>
                     </tbody>
@@ -49,8 +46,7 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 <app-agregar-producto-modal *ngIf="mostrarModal" [productoActual]="productoActualParaEditar"
     (cerrarModal)="mostrarModal=false; refrescarListaProductos()" (refrescarProductos)="refrescarListaProductos()">
 </app-agregar-producto-modal>
-    

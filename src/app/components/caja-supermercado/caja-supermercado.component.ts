@@ -53,8 +53,4 @@ export class CajaSupermercadoComponent {
       this.productosAgregados.splice(indice, 1);
     }
   }
-
-
-  
-
 }

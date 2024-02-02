@@ -23,14 +23,11 @@ export class AgregarProductoModalComponent {
     }
   }
 
-
   nombreProducto: string = '';
   codigoBarras: string = '';
   precioProducto: number | null = null;
   esModoEdicion: boolean = false;
   idProducto: number | null = null;
-
-  
 
   constructor(private productService: ProductService) { }
 
@@ -97,8 +94,6 @@ export class AgregarProductoModalComponent {
       }
     });
   }
-
-
 
   resetForm() {
     this.nombreProducto = '';

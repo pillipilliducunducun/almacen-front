@@ -100,7 +100,6 @@ export class AgregarProductoModalComponent {
     });
   }
 
-
   resetForm() {
     this.nombreProducto = '';
     this.codigoBarras = '';

@@ -12,7 +12,7 @@ export class AgregarProductoModalComponent {
   @Output() cerrarModal = new EventEmitter<void>();
   @Input() set productoActual(value: any) {
     if (value) {
-      this.idProducto = value.id;  // Asegúrate de que el producto tiene un campo 'id'
+      this.idProducto = value.id;
       this.nombreProducto = value.nombre;
       this.codigoBarras = value.codigo_barra;
       this.precioProducto = value.valor;
@@ -21,6 +21,7 @@ export class AgregarProductoModalComponent {
       this.resetForm();
       this.esModoEdicion = false;
     }
+    this.formularioModificado = false;  // Initialize as false since the form has not been modified yet
   }
 
   nombreProducto: string = '';
@@ -28,6 +29,7 @@ export class AgregarProductoModalComponent {
   precioProducto: number | null = null;
   esModoEdicion: boolean = false;
   idProducto: number | null = null;
+  formularioModificado: boolean = false;  // To track if the form has been modified
 
   constructor(private productService: ProductService) { }
 
@@ -35,8 +37,11 @@ export class AgregarProductoModalComponent {
     this.cerrarModal.emit();
   }
 
+  onModelChange() {
+    this.formularioModificado = true;  // Set to true on any model change
+  }
+
   guardarProducto() {
-    // Verificar que todos los campos requeridos estén presentes
     if (!this.nombreProducto || !this.codigoBarras || this.precioProducto === null) {
       Swal.fire({
         icon: 'error',
@@ -46,7 +51,6 @@ export class AgregarProductoModalComponent {
       return;
     }
 
-    // Mostrar el diálogo de confirmación
     Swal.fire({
       title: this.esModoEdicion ? '¿Actualizar Producto?' : '¿Agregar Producto?',
       text: this.esModoEdicion ? "¡Los cambios se guardarán!" : "¡Se agregará un nuevo producto!",
@@ -57,18 +61,13 @@ export class AgregarProductoModalComponent {
       confirmButtonText: this.esModoEdicion ? 'Sí, actualizar!' : 'Sí, agregar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        // El usuario confirmó, proceder con agregar o actualizar
         const producto = {
           nombre: this.nombreProducto,
           codigo_barra: this.codigoBarras,
           valor: this.precioProducto
         };
 
-        if (this.esModoEdicion) {
-          if (this.idProducto === null) {
-            Swal.fire('Error', 'No se proporcionó un ID de producto para la actualización.', 'error');
-            return;
-          }
+        if (this.esModoEdicion && this.idProducto !== null) { // Ensure idProducto is not null
           this.productService.updateProduct(this.idProducto, producto).subscribe({
             next: (response) => {
               Swal.fire('Actualizado', 'El producto ha sido actualizado.', 'success');
@@ -77,9 +76,10 @@ export class AgregarProductoModalComponent {
             },
             error: (error) => {
               Swal.fire('Error', 'Error al actualizar el producto.', 'error');
+              this.cerrar();
             }
           });
-        } else {
+        } else if (!this.esModoEdicion) {
           this.productService.createProduct(producto).subscribe({
             next: (response) => {
               Swal.fire('Agregado', 'El producto ha sido agregado.', 'success');
@@ -90,14 +90,21 @@ export class AgregarProductoModalComponent {
               Swal.fire('Error', 'Error al agregar el producto.', 'error');
             }
           });
+        } else {
+          // Handle the case where idProducto is null in edit mode
+          Swal.fire('Error', 'ID de producto no válido para la actualización.', 'error');
         }
+
+        this.formularioModificado = false;  // Reset the form modification tracker
       }
     });
   }
+
 
   resetForm() {
     this.nombreProducto = '';
     this.codigoBarras = '';
     this.precioProducto = null;
+    this.formularioModificado = false;  // Also reset the form modification tracker here
   }
 }

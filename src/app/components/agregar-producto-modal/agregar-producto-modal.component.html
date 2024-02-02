@@ -11,30 +11,29 @@
         <!-- Cuerpo del Modal -->
         <div class="modal-body">
             <!-- Campo para el Nombre del Producto -->
-            <div class="form-group">
-                <label for="nombreProducto">Nombre del Producto</label>
-                <input type="text" class="form-control" [(ngModel)]="nombreProducto"
-                    placeholder="Ingrese el nombre del producto">
-            </div>
-            <!-- Campo para el Código de Barras -->
-            <div class="form-group">
-                <label for="codigoBarras">Código de Barras</label>
-                <input type="text" class="form-control" [(ngModel)]="codigoBarras"
-                    placeholder="Ingrese el código de barras">
-            </div>
-            <!-- Campo para el Precio -->
-            <div class="form-group">
-                <label for="precioProducto">Precio</label>
-                <input type="number" class="form-control" [(ngModel)]="precioProducto" placeholder="Ingrese el precio">
-            </div>
-            <!-- Más campos según necesites -->
+            <!-- Campo para el Nombre del Producto -->
+        <div class="form-group">
+        <label for="nombreProducto">Nombre del Producto</label>
+        <input type="text" class="form-control" [(ngModel)]="nombreProducto" (ngModelChange)="onModelChange()"
+            placeholder="Ingrese el nombre del producto">
         </div>
-        <!-- Pie del Modal -->
-        <div class="modal-footer">
-            <!-- Botón para guardar el nuevo producto -->
-            <button type="button" class="btn btn-primary" (click)="guardarProducto()">
-                {{ esModoEdicion ? 'Actualizar Producto' : 'Agregar Producto' }}
-            </button>
+        <!-- Campo para el Código de Barras -->
+        <div class="form-group">
+        <label for="codigoBarras">Código de Barras</label>
+        <input type="text" class="form-control" [(ngModel)]="codigoBarras" (ngModelChange)="onModelChange()"
+            placeholder="Ingrese el código de barras">
+        </div>
+        <!-- Campo para el Precio -->
+        <div class="form-group">
+        <label for="precioProducto">Precio</label>
+        <input type="number" class="form-control" [(ngModel)]="precioProducto" (ngModelChange)="onModelChange()" placeholder="Ingrese el precio">
+        </div>
+        <!-- Botón para guardar el nuevo producto, deshabilitado si no se han realizado cambios -->
+        <!-- Botón para guardar el nuevo producto, deshabilitado si no se han realizado cambios -->
+        <button type="button" class="btn btn-primary" [disabled]="!formularioModificado" (click)="guardarProducto()">
+            {{ esModoEdicion ? 'Actualizar Producto' : 'Agregar Producto' }}
+        </button>&nbsp;
+
             <!-- Botón para cerrar el modal sin guardar -->
             <button type="button" class="btn btn-secondary" (click)="cerrar()">Cerrar</button>
         </div>

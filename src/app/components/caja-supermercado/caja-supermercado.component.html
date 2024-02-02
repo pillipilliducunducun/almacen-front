@@ -21,39 +21,49 @@
                             (keyup.enter)="agregarProductoPorCodigo()" placeholder="Ingresar código de barras">
                     </div>
                     <!-- Botones Pagar y Limpiar -->
-                    <div class="row">
+                    <div class="row justify-content-end"> <!-- Usa la clase justify-content-end para alinear los botones a la derecha -->
                         <div class="col-md-6">
                             <button type="button" class="btn btn-success btn-sm mt-3" (click)="realizarPago()"
                                 [disabled]="productosAgregados.length === 0">Pagar</button>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-danger btn-sm mt-3" (click)="limpiarCarrito()"
-                                [disabled]="productosAgregados.length === 0">Limpiar</button>
+                        <div class="row justify-content-end">
+                            <div class="col-md-6">
+                                <div class="col-md-6" *ngIf="!mostrarVistaDetalle">
+                                    <button type="button" class="btn btn-danger btn-sm mt-3" (click)="limpiarCarrito()"
+                                        [disabled]="productosAgregados.length === 0">Limpiar</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+
                         </div>
                     </div>
-                    <!-- Detalle del Pago (Mostrado cuando se realiza un pago) -->
-                    <div class="mt-3" *ngIf="mostrarVistaDetalle">
-                        <div class="card shadow">
-                            <div class="card-header bg-secondary text-white">
-                                <h3 class="card-title text-center">Detalle del Pago</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="dineroRecibido">Dinero Recibido:</label>
-                                    <input type="text" class="form-control" id="dineroRecibido"
-                                        [(ngModel)]="dineroRecibido" placeholder="Ingrese el dinero recibido"
-                                        (keyup.enter)="calcularVuelto()">
-                                </div>
-                                <div *ngIf="vuelto !== 0" class="mt-3">
-                                    <h4>Vuelto:</h4>
-                                    <h1>
-                                        <p class="font-weight-bold text-danger">$ {{ vuelto }}</p>
-                                    </h1>
-                                    <!-- Botón Finalizar -->
-                                    <button type="button" class="btn btn-primary btn-sm" (click)="finalizarCompra()">Finalizar</button>
-                                    
-                                </div>
-                            </div>
+                    
+                </div>
+            </div>
+
+            <!-- Detalle del Pago (Mostrado cuando se realiza un pago) -->
+            <div class="mt-3" *ngIf="mostrarVistaDetalle">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title text-center">Detalle del Pago</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="dineroRecibido">Dinero Recibido:</label>
+                            <input type="text" class="form-control" id="dineroRecibido" [(ngModel)]="dineroRecibido"
+                                placeholder="Ingrese el dinero recibido" (keyup.enter)="calcularVuelto()">
+                        </div>
+                        <div *ngIf="vuelto !== 0" class="mt-3">
+                            <h4>Vuelto:</h4>
+                            <h1>
+                                <p class="font-weight-bold text-danger">$ {{ vuelto }}</p>
+                            </h1>
+                            <!-- Botón Finalizar -->
+                            <button type="button" class="btn btn-primary btn-sm" (click)="finalizarCompra()">Finalizar</button>
+            
                         </div>
                     </div>
                 </div>

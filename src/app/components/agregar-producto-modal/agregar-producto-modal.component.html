@@ -11,34 +11,39 @@
 
         <!-- Cuerpo del Modal -->
         <div class="modal-body">
-            <form>
-                <!-- Campo para el Nombre del Producto -->
-                <div class="form-group">
-                    <label for="nombreProducto">Nombre del Producto</label>
-                    <input type="text" class="form-control" id="nombreProducto"
-                        placeholder="Ingrese el nombre del producto">
-                </div>
 
-                <!-- Campo para el Código de Barras -->
-                <div class="form-group">
-                    <label for="codigoBarras">Código de Barras</label>
-                    <input type="text" class="form-control" id="codigoBarras" placeholder="Ingrese el código de barras">
-                </div>
+            <!-- Campo para el Nombre del Producto -->
+            <div class="form-group">
+                <label for="nombreProducto">Nombre del Producto</label>
+                <input type="text" class="form-control" [(ngModel)]="nombreProducto"
+                    placeholder="Ingrese el nombre del producto">
 
-                <!-- Campo para el Precio -->
-                <div class="form-group">
-                    <label for="precioProducto">Precio</label>
-                    <input type="number" class="form-control" id="precioProducto" placeholder="Ingrese el precio">
-                </div>
+            </div>
 
-                <!-- Más campos según necesites -->
-            </form>
+            <!-- Campo para el Código de Barras -->
+            <div class="form-group">
+                <label for="codigoBarras">Código de Barras</label>
+                <input type="text" class="form-control" [(ngModel)]="codigoBarras"
+                    placeholder="Ingrese el código de barras">
+
+            </div>
+
+            <!-- Campo para el Precio -->
+            <div class="form-group">
+                <label for="precioProducto">Precio</label>
+                <input type="number" class="form-control" [(ngModel)]="precioProducto" placeholder="Ingrese el precio">
+            </div>
+
+            <!-- Más campos según necesites -->
+
         </div>
 
         <!-- Pie del Modal -->
         <div class="modal-footer">
             <!-- Botón para guardar el nuevo producto -->
-            <button type="button" class="btn btn-primary">Guardar Producto</button>
+            <button type="button" class="btn btn-primary" (click)="guardarProducto()">
+                {{ esModoEdicion ? 'Actualizar Producto' : 'Agregar Producto' }}
+            </button>
             <!-- Botón para cerrar el modal sin guardar -->
             <button type="button" class="btn btn-secondary" (click)="cerrar()">Cerrar</button>
         </div>

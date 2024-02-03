@@ -25,12 +25,13 @@ export class ListaProductosComponent implements OnInit {
   // Función para buscar por código de barras
   buscarPorCodigo(event?: any) {
     const codigo = event ? event.target.value : this.codigoBarras;
-    if (codigo) {
+    if (codigo && Array.isArray(this.productos)) {
       this.productosFiltrados = this.productos.filter(producto => producto.codigo_barra.includes(codigo));
     } else {
-      this.productosFiltrados = [...this.productos]; // Copia todos los productos si no hay criterio de búsqueda
+      this.productosFiltrados = [...this.productos];
     }
   }
+
 
   // Función para buscar por nombre de producto
   buscarPorNombre(event?: any) {
@@ -79,9 +80,24 @@ export class ListaProductosComponent implements OnInit {
   }
 
   refrescarListaProductos() {
-    this.productService.getAllProducts().subscribe(data => {
-      this.productos = data;
-      this.productosFiltrados = [...this.productos]; // Inicializa los productos filtrados con todos los productos
+    this.productService.getAllProducts().subscribe({
+      next: (data) => {
+        // Asegurarse de que 'data' sea un arreglo antes de asignarlo a 'this.productos'
+        if (Array.isArray(data)) {
+          this.productos = data;
+        } else {
+          // Manejar casos donde 'data' no es un arreglo, por ejemplo, inicializando 'this.productos' a un arreglo vacío
+          this.productos = [];
+        }
+        this.productosFiltrados = [...this.productos];
+      },
+      error: (error) => {
+        console.error('Error al obtener los productos: ', error);
+        // Inicializar 'this.productos' y 'this.productosFiltrados' a arreglos vacíos en caso de error
+        this.productos = [];
+        this.productosFiltrados = [];
+      }
     });
   }
+
 }

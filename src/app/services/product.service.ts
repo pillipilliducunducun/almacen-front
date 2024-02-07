@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8085/almacen-back-php/public/products'; // Asegúrate de que la URL sea correcta
+  private apiUrl = 'https://runatec.cl/api/public/products'; // Asegúrate de que la URL sea correcta
 
   constructor(private http: HttpClient) { }
 
